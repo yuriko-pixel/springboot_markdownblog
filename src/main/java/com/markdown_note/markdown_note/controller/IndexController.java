@@ -3,17 +3,20 @@ package com.markdown_note.markdown_note.controller;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.markdown_note.markdown_note.entity.Post;
+import com.markdown_note.markdown_note.service.PostService;
 
 @Controller
-@RequestMapping({"/","/index"})
 public class IndexController {
+
+	@Autowired
+	private PostService postService;
 
 	@GetMapping
 	public String main(Model model) {
@@ -24,7 +27,10 @@ public class IndexController {
 	@PostMapping
 	public String save(Post post, Model model) {
 		post.setHtml(markdownToHTML(post.getContent()));
-		model.addAttribute("post", post);
+		post.setId((long) 1);
+		postService.savePost(post);
+		System.out.println(postService.getAllPosts());
+		model.addAttribute("postList", postService.getAllPosts());
 		return "saved";
 	}
 

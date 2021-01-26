@@ -40,10 +40,23 @@
 
 <div class="container">
     <div class="col-sm-12 mt-5">
-        <h1 th:text="${post.title}">Title</h1>
+    <div th:each="post: ${postList}">
+    	<span th:text="${post.title}"></span>
+    	<span th:each="line: ${post.content.split('\r\n|\r|\n', -1)}">
+    		<th:block th:text="${line}" /><br />
+    	</span>
+    	<span th:text="${post.html}"></span>
+    </div>
+        <!-- <h1 th:text="${post.title}">Title</h1>
         <div th:utext="${post.html}">Content</div>
-
-        <a th:href="@{/}" class="btn btn-primary">Go back</a>
+		<p>
+		  <th:block th:if="${post.content}">
+		    <th:block th:each="line: ${post.content.split('\r\n|\r|\n', -1)}">
+		      <th:block th:text="${line}" /><br />
+		    </th:block>
+		  </th:block>
+		</p>
+        <a th:href="@{/}" class="btn btn-primary">Go back</a> -->
     </div>
 </div>
 

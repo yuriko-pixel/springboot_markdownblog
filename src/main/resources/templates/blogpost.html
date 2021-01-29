@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Spring Boot Thymeleaf Application - Bootstrap Markdown Editor</title>
-    <link th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet"></link>
-    <!-- <link th:href="@{http://localhost:8080//webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet"></link> -->
-    <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+    <!-- <link th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet"></link> -->
+    <link th:href="@{http://localhost:8080//webjars/bootstrap/4.6.0/css/bootstrap.min.css}" rel="stylesheet"></link>
+    <!-- <script th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script> -->
 </head>
 <body>
 
@@ -38,35 +38,20 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
     <div class="col-sm-12 mt-5">
     <div class="card-deck">
-	    <div class="card">
-	    <div class="card-body">
-
-		    <div th:if="${post.tag}">
-			    <div th:each="tags: ${post.tag.split(',', -1)}">
-			      <span th:text="${tags}" class="d-inline p-2 bg-primary text-white"></span>
-			    </div>
-			 </div>
-	    <div th:utext="${post.title}" class="card-title"></div>
-	    <div th:text="${#dates.format(post.postdate, 'yyyy/MM/dd')}"></div>
-	    <div th:text="${post.author}"></div>
-	   	<img th:src="${post.headerimg}" class="card-title"/>
+	    <div class="card" th:each="post: ${postList}">
+	    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+	    	<div class="card-body">
+		    	<div th:text="${post.title}" class="card-title"></div>
 		    	<div th:utext="${post.html}" class="card-text">Content</div>
 		    </div>
 		 </div>
 	 </div>
-	 <!-- <p>
-	  <th:block th:if="${post.content}">
-	    <th:block th:each="line: ${post.content.split('\r\n|\r|\n', -1)}">
-	      <th:block th:text="${line}" /><br />
-	    </th:block>
-	  </th:block> -->
-	</p>
         <a th:href="@{/}" class="btn btn-primary">Go back</a>
     </div>
 </div>
+<a th:href="@{/}" class="btn btn-primary">Go back</a>
 </body>
 </html>

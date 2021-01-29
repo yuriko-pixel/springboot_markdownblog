@@ -25,4 +25,8 @@ public class PostService {
 	public void savePost(Post post) {
 		postRepository.save(post);
 	}
+
+	public Post getPost(long id) {
+		return postRepository.findOneById(id);
+	}
 }

@@ -7,5 +7,5 @@ import com.markdown_note.markdown_note.entity.Post;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long>{
-
+	public Post findOneById(long id);
 }
